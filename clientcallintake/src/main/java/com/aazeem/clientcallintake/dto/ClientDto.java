@@ -7,10 +7,9 @@ public class ClientDto {
     private String phoneNum;
     private String email;
 
-        // empty constructor that lets Java create the obj without values.
+    // empty constructor that lets Java create the obj without values.
     public ClientDto() {
     }
-
 
     public ClientDto(int id, String firstName, String lastName, String phoneNum, String email) {
         this.id = id;
@@ -20,14 +19,15 @@ public class ClientDto {
         this.email = email;
     }
 
-    public Integer getID() {
+    public Integer getiD() {
         return id;
     }
 
-    public void setId(Integer id){
+    public void setId(Integer id) {
         this.id = id;
     }
-     public String getFirstName() {
+
+    public String getFirstName() {
         return firstName;
     }
 
@@ -43,7 +43,7 @@ public class ClientDto {
         this.lastName = lastName;
     }
 
-    public String getPhoneNumber() {
+    public String getPhoneNum() {
         return phoneNum;
     }
 
@@ -59,4 +59,3 @@ public class ClientDto {
         this.email = email;
     }
 }
-
