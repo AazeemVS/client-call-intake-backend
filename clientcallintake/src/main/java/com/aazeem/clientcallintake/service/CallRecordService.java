@@ -41,4 +41,22 @@ public class CallRecordService {
 
         return callRecordRepository.save(callRecord);
     }
+
+    public CallRecord updateCallRecord(Integer id, CreateCallRecordRequest request) {
+        CallRecord existing = callRecordRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Call record not found: " + id));
+
+        Client client = clientRepository.findById(request.getClientId())
+                .orElseThrow(() -> new IllegalArgumentException("Client not found: " + request.getClientId()));
+
+        existing.setCallReason(request.getCallReason());
+        existing.setNotes(request.getNotes());
+        existing.setPriority(request.getPriority());
+        existing.setStatus(request.getStatus());
+        existing.setCreatedAt(request.getCreatedAt() != null ? request.getCreatedAt() : existing.getCreatedAt());
+        existing.setClient(client);
+
+        return callRecordRepository.save(existing);
+    }
 }
+
