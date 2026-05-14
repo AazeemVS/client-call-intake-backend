@@ -3,12 +3,16 @@ package com.aazeem.clientcallintake.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 import com.aazeem.clientcallintake.dto.CallRecordDto;
 import com.aazeem.clientcallintake.dto.CreateCallRecordRequest;
@@ -40,6 +44,15 @@ public class CallRecordController {
         request.setId(id);
         CallRecord updated = callRecordService.updateCallRecord(id, request);
         return ResponseEntity.ok(toDto(updated));
+    }
+
+    @GetMapping("/client/{clientId}")
+    public ResponseEntity<List<CallRecordDto>> getCallsByClient(@PathVariable Integer clientId) {
+        List<CallRecordDto> records = callRecordService.getAllCallsPerClient(clientId)
+                .stream()
+                .map(this::toDto)
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(records);
     }
 
     private CallRecordDto toDto(CallRecord callRecord) {
