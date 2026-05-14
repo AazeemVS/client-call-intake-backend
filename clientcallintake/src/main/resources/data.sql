@@ -21,3 +21,7 @@ INSERT INTO call_record (id, call_reason, notes, priority, status, created_at, c
 (8, 'Password reset', 'Forgot password assistance', 'MODERATE', 'RESOLVED', '2024-01-22 15:20:00', 3),
 (9, 'Account closure', 'Customer wants to close account', 'HIGH', 'IN_PROGRESS', '2024-01-23 12:10:00', 4),
 (10, 'Feedback', 'Positive feedback on recent update', 'LOW', 'CLOSED', '2024-01-24 17:00:00', 5);
+
+-- Advance auto-increment sequences past the seeded IDs to prevent collision on new inserts
+ALTER TABLE client ALTER COLUMN id RESTART WITH 6;
+ALTER TABLE call_record ALTER COLUMN id RESTART WITH 11;
